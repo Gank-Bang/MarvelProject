@@ -42,10 +42,18 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
                 guard err == nil else {
                     return
                 }
-                
+
                 let allCharacters = characters
                 DispatchQueue.main.async {
                     for j in allCharacters!{
+                        //print(j.id)
+                        MarvelServices.getComics(id: j.id) { err, comics in
+                            guard err == nil else {
+                                return
+                            }
+                        j.comics = comics
+                        }
+
                         self.characters.append(j)
                         self.characterSearch.append(j)
                     }
@@ -104,7 +112,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         print(character.name)
         print(character.thumbnail)
         print(character.id)
-        
+        //print(character.comics![1])
     }
     
     

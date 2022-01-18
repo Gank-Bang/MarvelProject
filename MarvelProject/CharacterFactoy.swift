@@ -31,7 +31,7 @@ class CharacterFactory {
         var imageFormat = dict["extension"] as! String
         let lien = "\(thumbnail).\(imageFormat)"
         let lienComplete = URL(string: lien)
-        print(character.details)
+        //print(character.details)
         
         character.thumbnail = lienComplete
     }

@@ -71,11 +71,11 @@ public class MarvelServices {
     }
     
     
-    class func getComics(offset:Int,completion: @escaping(Error?, [MarvelCharacters]?)->Void) {
-        var characterList: [MarvelCharacters] = []
+    class func getComics(id:Int,completion: @escaping(Error?, [MarvelComics]?)->Void) {
+        var comicsList: [MarvelComics] = []
         let SearchViewController = SearchViewController()
         
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
+        guard let url = URL(string: "http://gateway.marvel.com/v1/public/characters/\(id)/comics?ts=1&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
         else{
             return
         }
@@ -111,18 +111,19 @@ public class MarvelServices {
                     guard let image = result["thumbnail"] as? [String: Any] else {
                         return
                     }
-                    let character = CharacterFactory.createCharacter(from: result)
-                    //guard let characterExist = character as? MarvelCharacters else {
-                    //    return
-                    //}
-                    CharacterFactory.addImage(character: character!, from: image)
-                    characterList.append(character!)
+                    let comic = ComicsFactory.createComics(from: result)
+                    
+                    if(comic != nil){
+                        ComicsFactory.addImage(comic: comic!, from: image)
+                        comicsList.append(comic!)
+                    }
+                    
                 }
 
                 
                 
                 
-                completion(err, characterList)
+                completion(err, comicsList)
             }
         }
         task.resume() // lance la requete http

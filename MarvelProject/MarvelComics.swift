@@ -20,12 +20,12 @@ class MarvelComics: CustomStringConvertible {
     var details: String
     var numberPages: Int
     //var serieName: [Comic]
-    var thumbnail: URL
-    var characterList: [MarvelCharacters]
+    var thumbnail: URL?
+    var characterList: [MarvelCharacters]?
     //var events: [Evenement]
     //var urls: [Lien]
         
-    init(id: Int, title: String,digitalId: Int,issueNumber:Int,details:String,numberPages:Int,thumbnail: URL,characterList:[MarvelCharacters]) {
+    init(id: Int, title: String,digitalId: Int,issueNumber:Int,details:String,numberPages:Int/*thumbnail: URL,characterList:[MarvelCharacters]*/) {
         
         self.id = id
         self.title = title
@@ -33,8 +33,8 @@ class MarvelComics: CustomStringConvertible {
         self.issueNumber = issueNumber
         self.details = details
         self.numberPages = numberPages
-        self.thumbnail = thumbnail
-        self.characterList = characterList
+        //self.thumbnail = thumbnail
+        //self.characterList = characterList
 
 
     }
