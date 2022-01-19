@@ -15,7 +15,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
 
     var cellList:[CharacterCollectionViewCell] = []
     var numberOfRow:Int = 0
-    var appelApi = [0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
+    var appelApi = [0,100,200,300]//,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
     @IBOutlet weak var listCharacters: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loadingImage: UIImageView!
@@ -36,6 +36,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         super.viewDidLoad()
         
         self.listCharacters.isHidden = true
+        self.searchBar.isHidden = true
 
         for i in appelApi{
             MarvelServices.getCharacters(offset: i) { err, characters in
@@ -74,10 +75,10 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.loadingImage.isHidden = true
-        self.listCharacters.isHidden = false
-    }
+    //override func viewWillAppear(_ animated: Bool) {
+       // self.loadingImage.isHidden = true
+       // self.listCharacters.isHidden = false
+   // }
     
     
 
@@ -88,12 +89,13 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //self.numberOfRow += 1
+        self.numberOfRow += 1
         
-        //if numberOfRow == 10{
-            //self.loadingImage.isHidden = true
-            //self.listCharacters.isHidden = false
-        //}
+        if numberOfRow == 80{
+            self.loadingImage.isHidden = true
+            self.listCharacters.isHidden = false
+            self.searchBar.isHidden = false
+        }
         //print(numberOfRow)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterCell", for: indexPath) as! CharacterCollectionViewCell
         let character = self.characterSearch[indexPath.row]
