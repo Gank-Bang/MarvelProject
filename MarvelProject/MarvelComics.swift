@@ -10,7 +10,7 @@ import Foundation
 class MarvelComics: CustomStringConvertible {
     
     var description: String {
-     "Comics : \(self.title)\n"
+     "Comics : \(self.title)\n \(self.thumbnail)\n \(self.listNames)\n "
     }
     
     var id: Int
@@ -22,7 +22,7 @@ class MarvelComics: CustomStringConvertible {
     //var serieName: [Comic]
     var thumbnail: URL?
     var characterList: [MarvelCharacters]?
-    //var events: [Evenement]
+    var listNames: [String]?
     //var urls: [Lien]
         
     init(id: Int, title: String,digitalId: Int,issueNumber:Int,details:String,numberPages:Int/*thumbnail: URL,characterList:[MarvelCharacters]*/) {

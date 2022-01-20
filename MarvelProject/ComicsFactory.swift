@@ -11,18 +11,20 @@ class ComicsFactory {
     
     
     class func createComics(from dict: [String: Any]) -> MarvelComics? {
+        
+        let details = dict["description"] as? String ?? ""
+        
         guard let id = dict["id"] as? Int,
               let title = dict["title"] as? String,
-              let details = dict["description"] as? String,
-              let thumbnail = dict["path"] as? String?,
+              //let thumbnail = dict["path"] as? String?,
               let issueNumber = dict["issueNumber"] as? Int,
               let numberPages = dict["pageCount"] as? Int,
-              let characterList = dict["characters"] as? String?,
+              //let characterList = dict["characters"] as? String?,
               //let ressourceURL = dict["RessourceURI"] as? String,
-              let digitalId = dict["digitalId"] as? Int else {
+              let digitalId = dict["digitalId"] as? Int
+        else {
                   return nil
-                  
-                  
+
               }
         
         return MarvelComics(id: id, title: title,digitalId: digitalId,issueNumber:issueNumber,details:details,numberPages:numberPages//,thumbnail: URL,characterList:[MarvelCharacters]
@@ -42,6 +44,14 @@ class ComicsFactory {
         comic.thumbnail = lienComplete
         //print(comic.details)
         //print(comic.id)
+    }
+    
+    
+    class func addCharacters(comic:MarvelComics,from dict: [String: Any]) -> Void{
+        var name = dict["name"] as! String
+        comic.listNames?.append(name)
+        print(name)
+
     }
     
     

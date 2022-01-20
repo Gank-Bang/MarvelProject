@@ -12,10 +12,10 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     
     
 
-
+    var listComics:[MarvelComics] = []
     var cellList:[CharacterCollectionViewCell] = []
     var numberOfRow:Int = 0
-    var appelApi = [0,100,200,300]//,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
+    var appelApi = [0]//100,200,300]//,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
     @IBOutlet weak var listCharacters: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loadingImage: UIImageView!
@@ -43,24 +43,31 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
                 guard err == nil else {
                     return
                 }
-
+            MarvelServices.getComics(offset: i) { err, comics in
+                    guard err == nil else {
+                        return
+                    }
+                
+                
+                let allComics = comics
                 let allCharacters = characters
                 DispatchQueue.main.async {
+                    
+                    for k in allComics!{
+                        self.listComics.append(k)
+                    }
+                    
+                    
                     for j in allCharacters!{
                         //print(j.id)
-                        MarvelServices.getComics(id: j.id) { err, comics in
-                            guard err == nil else {
-                                return
-                            }
-                        j.comics = comics
-                        }
-
                         self.characters.append(j)
                         self.characterSearch.append(j)
                     }
                 }
             }
+            }
         }
+    
         
         
         self.searchBar.delegate = self
@@ -91,7 +98,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         self.numberOfRow += 1
         
-        if numberOfRow == 80{
+        if numberOfRow == 5{
             self.loadingImage.isHidden = true
             self.listCharacters.isHidden = false
             self.searchBar.isHidden = false
@@ -115,6 +122,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         print(character.thumbnail)
         print(character.id)
         //print(character.comics![1])
+        print(self.listComics[7].listNames)
     }
     
     
