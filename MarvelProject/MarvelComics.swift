@@ -20,9 +20,9 @@ class MarvelComics: CustomStringConvertible {
     var details: String
     var numberPages: Int
     //var serieName: [Comic]
-    var thumbnail: URL?
+    var thumbnail: URL? = URL(string:"http://i.annihil.us/u/prod/marvel/i/mg/5/a0/4c0035890fb0a.jpg")
     var characterList: [MarvelCharacters]?
-    var listNames: [String]?
+    var listNames: [String]? = []
     //var urls: [Lien]
         
     init(id: Int, title: String,digitalId: Int,issueNumber:Int,details:String,numberPages:Int/*thumbnail: URL,characterList:[MarvelCharacters]*/) {

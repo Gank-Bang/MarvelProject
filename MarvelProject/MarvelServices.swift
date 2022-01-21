@@ -15,7 +15,7 @@ public class MarvelServices {
         var characterList: [MarvelCharacters] = []
         let SearchViewController = SearchViewController()
         
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=10&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
         else{
             return
         }
@@ -75,7 +75,7 @@ public class MarvelServices {
         var comicsList: [MarvelComics] = []
         let SearchViewController = SearchViewController()
         
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/comics?ts=1&offset=\(offset)&limit=10&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/comics?ts=1&offset=\(offset)&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
         else{
             return
         }
@@ -119,10 +119,14 @@ public class MarvelServices {
                     }
                     
                     let comic = ComicsFactory.createComics(from: result)
-                    ComicsFactory.addImage(comic: comic!, from: image)
-
+                    guard let comicExist = comic as? MarvelComics else {
+                        return
+                    }
+                    ComicsFactory.addImage(comic: comicExist, from: image)
+                    
                     for character in nameCharacters {
-                        ComicsFactory.addCharacters(comic: comic!, from: character)
+                        let name = ComicsFactory.getCharacters(comic: comic!, from: character)
+                        comic?.listNames?.append(name)
                     }
                     
                     comicsList.append(comic!)

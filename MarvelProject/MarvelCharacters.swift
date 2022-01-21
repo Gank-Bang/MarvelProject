@@ -19,7 +19,7 @@ class MarvelCharacters: CustomStringConvertible {
     var modified: String
     var thumbnail: URL?
     //var ressourceURL: String
-    var comics: [MarvelComics]?
+    var comics: [MarvelComics]? = []
     //var series: [Serie]
     //var stories: [Story]
     //var events: [Evenement]

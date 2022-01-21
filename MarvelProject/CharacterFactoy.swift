@@ -13,12 +13,16 @@ class CharacterFactory {
     class func createCharacter(from dict: [String: Any]) -> MarvelCharacters? {
         guard let id = dict["id"] as? Int,
               let name = dict["name"] as? String,
-              let details = dict["description"] as? String,
+              var details = dict["description"] as? String,
               let thumbnail = dict["path"] as? String?,
               //let ressourceURL = dict["RessourceURI"] as? String,
               let modified = dict["modified"] as? String else {
                   return nil
               }
+        
+        if details == ""{
+            details = "No description available for this character."
+        }
         
         return MarvelCharacters(id: id, name: name,details: details,modified: modified/*thumbnail:thumbnail,ressourceURL: ressourceURL*/)
     }

@@ -47,11 +47,12 @@ class ComicsFactory {
     }
     
     
-    class func addCharacters(comic:MarvelComics,from dict: [String: Any]) -> Void{
-        var name = dict["name"] as! String
-        comic.listNames?.append(name)
-        print(name)
-
+    class func getCharacters(comic:MarvelComics,from dict: [String: Any]) -> String{
+        let name = dict["name"] as! String
+        let realName = ("\(name)")
+        //comic.listNames?.append(realName)
+        //print(name)
+        return realName
     }
     
     

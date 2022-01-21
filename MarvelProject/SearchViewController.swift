@@ -15,7 +15,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     var listComics:[MarvelComics] = []
     var cellList:[CharacterCollectionViewCell] = []
     var numberOfRow:Int = 0
-    var appelApi = [0]//100,200,300]//,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
+    var appelApi = [0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500]
     @IBOutlet weak var listCharacters: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loadingImage: UIImageView!
@@ -60,6 +60,14 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
                     
                     for j in allCharacters!{
                         //print(j.id)
+                        for z in self.listComics{
+                            if ((z.listNames?.contains(j.name)) != false) {
+                                j.comics?.append(z)
+                            }
+                            else{
+                                
+                            }
+                        }
                         self.characters.append(j)
                         self.characterSearch.append(j)
                     }
@@ -122,7 +130,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         print(character.thumbnail)
         print(character.id)
         //print(character.comics![1])
-        print(self.listComics[7].listNames)
+        print(self.listComics[1].listNames)
     }
     
     
@@ -151,11 +159,13 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         listCharacters.reloadData()
         }
     
- 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) -> Bool {
+
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        return true
     }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath])  {
         
