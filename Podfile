@@ -7,5 +7,5 @@ target 'MarvelProject' do
 
   # Pods for MarvelProject
   pod 'Alamofire'
-
+  pod 'SwiftyGif'
 end

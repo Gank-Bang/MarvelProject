@@ -34,6 +34,12 @@ class CharacterViewController: UIViewController,UICollectionViewDelegate,UIColle
         
         self.ComicsView.isHidden = true
         
+        if (character.thumbnail?.pathExtension == "gif") {
+            let url = character.thumbnail
+            self.imageCharacter.setGifFromURL(url!)
+            self.imageCharacter.startAnimatingGif()
+        
+        }
         
         
         //Initialisation du menu de selection

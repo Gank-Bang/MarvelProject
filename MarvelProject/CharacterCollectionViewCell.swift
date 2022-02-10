@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftyGif
+
 
 class CharacterCollectionViewCell: UICollectionViewCell {
 
@@ -28,11 +30,20 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     func redraw(character: MarvelCharacters){
         self.character = character
         self.characterName.text = character.name
-        self.download(URL: character.thumbnail!) {err, img in
-            DispatchQueue.main.sync {
-                self.characterImage.image = img
-            }
+        
+        if (character.thumbnail?.pathExtension == "gif") {
+            let url = character.thumbnail
+            //let realURL = URL(string: url)
+            self.characterImage.setGifFromURL(url!)
+            self.characterImage.startAnimatingGif()
+        }
+        else{
+            self.download(URL: character.thumbnail!) {err, img in
+                DispatchQueue.main.sync {
+                    self.characterImage.image = img
+                }
             
+            }
         }
     }
         
@@ -57,6 +68,7 @@ class CharacterCollectionViewCell: UICollectionViewCell {
                 completion(NSError(domain: "com.esgi.album", code: 2, userInfo: [NSLocalizedFailureReasonErrorKey : "No data found"]), nil)
                 return
             }
+            
             
             guard let img = UIImage(data: d) else {
                 completion(NSError(domain: "com.esgi.album", code: 4, userInfo: [NSLocalizedFailureReasonErrorKey : "No image found"]), nil)

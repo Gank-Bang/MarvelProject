@@ -115,6 +115,8 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterCell", for: indexPath) as! CharacterCollectionViewCell
         let character = self.characterSearch[indexPath.row]
         cell.redraw(character: character)
+        print(character.thumbnail?.pathExtension)
+        print(character.name)
         return cell
 
 
@@ -131,6 +133,8 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         print(character.id)
         //print(character.comics![1])
         print(self.listComics[1].listNames)
+        print(character.thumbnail?.pathExtension)
+        print(character.id)
     }
     
     
