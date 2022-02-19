@@ -7,7 +7,8 @@
 
 import UIKit
 
-class SearchViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate, UICollectionViewDataSourcePrefetching {
+
+class SearchViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate{
 
     
     
@@ -35,6 +36,11 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let url = URL(string: "https://c.tenor.com/_IT4iiUqkw4AAAAC/homer-simpson-les-simpson.gif")
+        let loader = UIActivityIndicatorView(style: .white)
+        self.loadingImage.setGifFromURL(url!, customLoader: loader)
+
+        //self.loadingImage.isHidden = true
         self.listCharacters.isHidden = true
         self.searchBar.isHidden = true
 
@@ -81,12 +87,10 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         self.searchBar.delegate = self
         self.listCharacters.delegate = self
         self.listCharacters.dataSource = self
-        self.listCharacters.prefetchDataSource = self
         let CharacterCellNib = UINib(nibName: "CharacterCollectionViewCell", bundle: nil)
         self.listCharacters.register(CharacterCellNib, forCellWithReuseIdentifier: "CharacterCell")
         
         
-
         
     }
     
@@ -111,16 +115,24 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
             self.listCharacters.isHidden = false
             self.searchBar.isHidden = false
         }
-        //print(numberOfRow)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterCell", for: indexPath) as! CharacterCollectionViewCell
-        let character = self.characterSearch[indexPath.row]
-        cell.redraw(character: character)
-        print(character.thumbnail?.pathExtension)
-        print(character.name)
-        return cell
+        print(numberOfRow)
+        
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterCell", for: indexPath) as! CharacterCollectionViewCell
 
+            let character = self.characterSearch[indexPath.row]
+            
 
-    }
+            cell.characterImage.setImage(at: character.thumbnail!, placeholderImage: UIImage(named: "marvelLoader.gif"), errorImage: UIImage(named: "marvelLoader.gif"))
+            cell.characterName.text = character.name
+            /*cell.redraw(character: character)
+            print(character.thumbnail?.pathExtension)
+            print(character.name)*/
+        
+            return cell
+        }
+
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell:CharacterCollectionViewCell = self.listCharacters.cellForItem(at: indexPath) as! CharacterCollectionViewCell
@@ -171,15 +183,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     
 
     
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath])  {
-        
 
-            for indexPath in indexPaths {
-                let model = self.characterSearch[indexPath.row]
-               }
-            
-        
-    }
 
     
 }

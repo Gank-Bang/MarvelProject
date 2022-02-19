@@ -16,15 +16,15 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var characterName: UILabel!
-    @IBOutlet weak var characterImage: UIImageView!
+    @IBOutlet weak var characterImage: CharacterImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         characterImage.clipsToBounds = true;
         characterImage.layer.cornerRadius = 10
 
     }
+
 
     
     func redraw(character: MarvelCharacters){
@@ -33,7 +33,6 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         
         if (character.thumbnail?.pathExtension == "gif") {
             let url = character.thumbnail
-            //let realURL = URL(string: url)
             self.characterImage.setGifFromURL(url!)
             self.characterImage.startAnimatingGif()
         }
