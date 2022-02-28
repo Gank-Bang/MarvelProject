@@ -147,13 +147,4 @@ public class MarvelServices {
         
     }
 
-    
-    
-    
-    
-    
-    
-    
-
-
 }

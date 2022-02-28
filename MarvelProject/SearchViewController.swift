@@ -20,7 +20,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var listCharacters: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loadingImage: UIImageView!
-    
+    @IBOutlet weak var addButton: UIButton!
     
     var characters: [MarvelCharacters] = []{
         didSet {
@@ -182,8 +182,10 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
 
+    @IBAction func pressAddButton(_ sender: Any) {
+        self.navigationController?.pushViewController(AddViewController(), animated: true)
+        
+    }
     
 
-
-    
 }
