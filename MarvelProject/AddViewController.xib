@@ -47,7 +47,9 @@
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-Tq-I1S">
                     <rect key="frame" x="130" y="577" width="154" height="31"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Add"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Add">
+                        <color key="baseBackgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="pressAddButton:" destination="-1" eventType="touchUpInside" id="esr-bI-t8R"/>
                     </connections>
@@ -56,12 +58,12 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gfp-Tq-I1S" secondAttribute="trailing" constant="131" id="1mC-oR-xTL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gfp-Tq-I1S" secondAttribute="trailing" constant="130" id="1mC-oR-xTL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ONM-jB-T22" secondAttribute="trailing" constant="35" id="A36-DF-avg"/>
                 <constraint firstItem="7kx-1K-VxK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="37" id="DYo-Ne-iza"/>
                 <constraint firstItem="BcP-kd-IIW" firstAttribute="top" secondItem="2Wd-io-h4z" secondAttribute="bottom" constant="17" id="JOX-J7-5lf"/>
                 <constraint firstItem="2Wd-io-h4z" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="55" id="LcL-pK-fmX"/>
-                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="top" secondItem="ONM-jB-T22" secondAttribute="bottom" constant="53.5" id="Nik-hB-jLU"/>
+                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="top" secondItem="ONM-jB-T22" secondAttribute="bottom" constant="89" id="Nik-hB-jLU"/>
                 <constraint firstItem="7kx-1K-VxK" firstAttribute="top" secondItem="BcP-kd-IIW" secondAttribute="bottom" constant="30.5" id="Ou8-s6-Ep9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Wd-io-h4z" secondAttribute="trailing" constant="35" id="QUq-7J-9hF"/>
                 <constraint firstItem="2Wd-io-h4z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="37" id="SPi-TH-end"/>
@@ -73,8 +75,8 @@
                 <constraint firstItem="ONM-jB-T22" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="37" id="efh-bp-Kly"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BcP-kd-IIW" secondAttribute="trailing" constant="35" id="fTD-Km-fza"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ONM-jB-T22" secondAttribute="trailing" constant="35" id="fxW-wc-Ie7"/>
-                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="129" id="lH2-Wu-jFO"/>
-                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="top" secondItem="ONM-jB-T22" secondAttribute="bottom" constant="53.5" id="lib-wY-4vx"/>
+                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="130" id="lH2-Wu-jFO"/>
+                <constraint firstItem="Gfp-Tq-I1S" firstAttribute="top" secondItem="ONM-jB-T22" secondAttribute="bottom" constant="89" id="lib-wY-4vx"/>
                 <constraint firstItem="7kx-1K-VxK" firstAttribute="top" secondItem="BcP-kd-IIW" secondAttribute="bottom" constant="30.5" id="lmR-RI-YzV"/>
                 <constraint firstItem="ONM-jB-T22" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="37" id="sTD-oT-2Ee"/>
             </constraints>

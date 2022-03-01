@@ -42,11 +42,11 @@ class AddViewController: UIViewController {
             "image": imageURL,
         ]
         if(!name.isEmpty && !description.isEmpty && !imageURL.isEmpty){
-            AF.request("https://esgi-marvel-app.herokuapp.com/addhero", method:.post, parameters: parameters as Parameters,encoding: JSONEncoding.default) .responseJSON { (response) in
+            AF.request("https://esgi-marvel-app-new.herokuapp.com/addhero", method:.post, parameters: parameters as Parameters,encoding: JSONEncoding.default) .responseJSON { (response) in
                 let alert = UIAlertController(title: "Informations", message: "Votre héros a bien été ajouté", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-                
+                self.navigationController?.popViewController(animated: true)
             }
         }
         else{

@@ -18,7 +18,6 @@ class OurCharacterViewController: UIViewController{
     @IBOutlet weak var nameCharacter: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageURL: UITextView!
-    @IBOutlet weak var backButton: UIButton!
     
     var character: OurHeroes!
     var cellChoosed: CharacterCollectionViewCell!
@@ -49,6 +48,10 @@ class OurCharacterViewController: UIViewController{
         self.imageURL.isHidden = true
         self.oldName = self.character.name
         self.saveButton.layer.cornerRadius = 10
+        
+        detailsCharacter!.layer.borderWidth = 1
+        detailsCharacter!.layer.borderColor = UIColor.red.cgColor
+        detailsCharacter!.layer.cornerRadius = 10
         //self.ComicsView.isHidden = true
         
         //if (character.thumbnail?.pathExtension == "gif") {
@@ -105,7 +108,7 @@ class OurCharacterViewController: UIViewController{
             guard let name = self.nameCharacter.text else{
                 return
             }
-            AF.request("https://esgi-marvel-app.herokuapp.com/getheros", method:.get, parameters: nil, encoding: JSONEncoding.default)
+            AF.request("https://esgi-marvel-app-new.herokuapp.com/getheros", method:.get, parameters: nil, encoding: JSONEncoding.default)
                 .responseJSON { (response) in
                     switch response.result {
                         
@@ -120,7 +123,7 @@ class OurCharacterViewController: UIViewController{
                                          print(nameHero ?? "n/a")
                                          let id = item["_id"] as! String
                                          print(id ?? "n/a")
-                                         AF.request("https://esgi-marvel-app.herokuapp.com/heros/\(id)", method:.delete)
+                                         AF.request("https://esgi-marvel-app-new.herokuapp.com/heros/\(id)", method:.delete)
                                              .responseJSON { (response) in
                                                  print(response)}
                                      }
@@ -133,7 +136,7 @@ class OurCharacterViewController: UIViewController{
                     }
                 }
             
-            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
          
             
         }))
@@ -161,7 +164,7 @@ class OurCharacterViewController: UIViewController{
             "image": newImage,
         ]
         
-        AF.request("https://esgi-marvel-app.herokuapp.com/getheros", method:.get, parameters: nil, encoding: JSONEncoding.default)
+        AF.request("https://esgi-marvel-app-new.herokuapp.com/getheros", method:.get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON { (response) in
                 switch response.result {
                     
@@ -174,7 +177,7 @@ class OurCharacterViewController: UIViewController{
                                  
                                  if(self.oldName == nameHero && !newName.isEmpty && !newDesc.isEmpty && !newImage.isEmpty){
                                      let id = item["_id"] as! String
-                                     AF.request("https://esgi-marvel-app.herokuapp.com/hero/\(id)", method:.patch, parameters: parameters as Parameters, encoding: JSONEncoding.default)
+                                     AF.request("https://esgi-marvel-app-new.herokuapp.com/hero/\(id)", method:.patch, parameters: parameters as Parameters, encoding: JSONEncoding.default)
                                          .responseJSON { (response) in
                                              let alert = UIAlertController(title: "Informations", message: "Les données ont bien été modifié", preferredStyle: UIAlertController.Style.alert)
                                              alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -208,10 +211,9 @@ class OurCharacterViewController: UIViewController{
         self.detailsCharacter.isEditable = true
         self.nameCharacter.isEditable = true
         self.saveButton.isHidden = false
+        self.imageCharacter.isHidden = true
         self.imageURL.isHidden = false
         self.imageURL.isEditable = true
-        self.imageCharacter.isHidden = true
-        
         
     }
     

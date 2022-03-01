@@ -46,7 +46,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbJ-IS-4c2">
                     <rect key="frame" x="136" y="433" width="131" height="31"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Edit"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Edit">
+                        <color key="baseBackgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="pressEditButton:" destination="-1" eventType="touchUpInside" id="bU0-EC-I9k"/>
                     </connections>

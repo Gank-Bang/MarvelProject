@@ -34,7 +34,12 @@ class CharacterViewController: UIViewController,UICollectionViewDelegate,UIColle
         self.detailsCharacter.text = self.character.details
         self.nameCharacter.text = self.character.name
         self.imageCharacter.layer.cornerRadius = 10
+        self.buttonMenu.layer.cornerRadius = 10
         self.ComicsView.isHidden = true
+        
+        detailsCharacter!.layer.borderWidth = 1
+        detailsCharacter!.layer.borderColor = UIColor.red.cgColor
+        detailsCharacter!.layer.cornerRadius = 10
         
         if (character.thumbnail?.pathExtension == "gif") {
             let url = character.thumbnail

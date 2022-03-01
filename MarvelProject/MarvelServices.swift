@@ -151,7 +151,7 @@ public class MarvelServices {
         var characterList: [OurHeroes] = []
         let SearchViewController = SearchViewController()
         
-        guard let url = URL(string: "https://esgi-marvel-app.herokuapp.com/getheros")
+        guard let url = URL(string: "https://esgi-marvel-app-new.herokuapp.com/getheros")
         else{
             return
         }
