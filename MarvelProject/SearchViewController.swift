@@ -63,7 +63,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
 
         
         
-        /*let loader = UIActivityIndicatorView(style: .white)
+        let loader = UIActivityIndicatorView(style: .white)
         self.loadingImage.setGifFromURL(listGifs.randomElement()!, customLoader: loader)
 
         //self.loadingImage.isHidden = true
@@ -71,7 +71,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         self.listCharacters.isHidden = true
         self.searchBar.isHidden = true
         self.marvelButton.isHidden = true
-        self.apiButton.isHidden = true*/
+        self.apiButton.isHidden = true
         
 
         for i in appelApi{

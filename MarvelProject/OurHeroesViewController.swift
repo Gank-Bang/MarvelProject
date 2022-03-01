@@ -70,7 +70,6 @@ class OurHeroesViewController: UIViewController,UICollectionViewDelegate,UIColle
 
         let character = self.characterSearch[indexPath.row]
         
-
         cell.characterImage.setImage(at: URL(string: character.thumbnail!)!, placeholderImage: UIImage(named: "marvelLoader.gif"), errorImage: UIImage(named: "marvelLoader.gif"))
         cell.characterName.text = character.name
         /*cell.redraw(character: character)

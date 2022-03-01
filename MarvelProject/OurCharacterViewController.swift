@@ -19,10 +19,15 @@ class OurCharacterViewController: UIViewController{
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageURL: UITextView!
     
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editButtonBack: UIButton!
+    
+    
     var character: OurHeroes!
     var cellChoosed: CharacterCollectionViewCell!
     
     var oldName:String = ""
+    var oldDescription:String = ""
     
     static func newInstance(cell:CharacterCollectionViewCell,character:OurHeroes) -> OurCharacterViewController {
 
@@ -46,7 +51,9 @@ class OurCharacterViewController: UIViewController{
         self.imageCharacter.layer.cornerRadius = 10
         self.saveButton.isHidden = true
         self.imageURL.isHidden = true
+        self.editButtonBack.isHidden = true
         self.oldName = self.character.name
+        self.oldDescription = self.character.details
         self.saveButton.layer.cornerRadius = 10
         
         detailsCharacter!.layer.borderWidth = 1
@@ -151,6 +158,8 @@ class OurCharacterViewController: UIViewController{
         self.detailsCharacter.isEditable = false
         self.nameCharacter.isEditable = false
         self.imageURL.isEditable = false
+        self.editButton.isHidden = false
+        self.editButtonBack.isHidden = true
         
         guard let newName = self.nameCharacter?.text,
               let newDesc = self.detailsCharacter.text,
@@ -193,6 +202,11 @@ class OurCharacterViewController: UIViewController{
                                      let alert = UIAlertController(title: "Attention", message: "Veuillez entrer tout les champs", preferredStyle: UIAlertController.Style.alert)
                                      alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                      self.present(alert, animated: true, completion: nil)
+                                     self.detailsCharacter.isEditable = true
+                                     self.nameCharacter.isEditable = true
+                                     self.imageURL.isEditable = true
+                                     self.editButton.isHidden = true
+                                     self.editButtonBack.isHidden = false
                                  }
                                 
                              }
@@ -214,7 +228,23 @@ class OurCharacterViewController: UIViewController{
         self.imageCharacter.isHidden = true
         self.imageURL.isHidden = false
         self.imageURL.isEditable = true
+        self.editButton.isHidden = true
+        self.editButtonBack.isHidden = false
         
     }
+    
+    @IBAction func pressEditButtonBack(_ sender: Any) {
+        self.editButtonBack.isHidden = true
+        self.editButton.isHidden = false
+        self.detailsCharacter.isEditable = false
+        self.nameCharacter.isEditable = false
+        self.saveButton.isHidden = true
+        self.imageCharacter.isHidden = false
+        self.imageURL.isHidden = true
+        self.imageURL.isEditable = false
+        self.nameCharacter.text = self.oldName
+        self.detailsCharacter.text = self.oldDescription
+    }
+    
     
 }
