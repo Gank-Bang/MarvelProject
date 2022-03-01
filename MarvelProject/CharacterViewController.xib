@@ -15,6 +15,7 @@
                 <outlet property="buttonMenu" destination="uPs-Gb-vQ6" id="iNJ-Ue-HKF"/>
                 <outlet property="detailsCharacter" destination="dYA-Ub-aqK" id="Xcm-Cn-lad"/>
                 <outlet property="imageCharacter" destination="BMK-7x-w4L" id="VDF-ZA-1VP"/>
+                <outlet property="nameCharacter" destination="l8x-ru-nXb" id="krf-cR-3VD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -69,6 +70,13 @@
                         <constraint firstAttribute="width" constant="374" id="epF-vb-VJG"/>
                         <constraint firstAttribute="height" constant="360" id="u4R-OR-slB"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8x-ru-nXb">
+                    <rect key="frame" x="91" y="323" width="233" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

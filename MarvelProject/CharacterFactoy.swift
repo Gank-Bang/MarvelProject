@@ -28,6 +28,24 @@ class CharacterFactory {
     }
     
     
+    class func createOurCharacter(from dict: [String: Any]) -> OurHeroes? {
+        guard let id = dict["_id"] as? String,
+              let name = dict["heroname"] as? String,
+              var details = dict["description"] as? String,
+              let thumbnail = dict["image"] as? String? else {
+                  return nil
+              }
+    
+        if details == ""{
+            details = "No description available for this character."
+        }
+        
+        return OurHeroes(id: id , name: name, details: details, thumbnail: thumbnail)
+    }
+    
+    
+    
+    
     class func addImage(character:MarvelCharacters,from dict: [String: Any]) -> Void{
         var thumbnail = dict["path"] as! String
         //var i = thumbnail.index(thumbnail.startIndex, offsetBy: 4)

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="MarvelProject" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="Uzl-rF-Y7p" id="Dnm-er-bwn"/>
+                <outlet property="apiButton" destination="cya-SW-puw" id="wu2-oo-xYv"/>
                 <outlet property="listCharacters" destination="DnL-ih-qzU" id="O9T-2b-NWl"/>
                 <outlet property="loadingImage" destination="di2-eR-dW3" id="zu1-e2-3sS"/>
+                <outlet property="marvelButton" destination="Swx-uW-s32" id="U1B-UP-czs"/>
                 <outlet property="searchBar" destination="7PZ-OW-rRX" id="Fl7-FG-RpY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,12 +25,16 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="DnL-ih-qzU">
-                    <rect key="frame" x="0.0" y="134" width="414" height="762"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="DnL-ih-qzU">
+                    <rect key="frame" x="0.0" y="158" width="414" height="738"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="414" id="RJn-Rw-OOK"/>
+                        <constraint firstAttribute="height" constant="780" id="UaW-Eq-oi6"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="10" id="Fi0-tG-60C">
                         <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="headerReferenceSize" width="0.0" height="10"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
@@ -37,51 +43,63 @@
                     <rect key="frame" x="82" y="323" width="250" height="250"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzl-rF-Y7p">
-                    <rect key="frame" x="327" y="44" width="67" height="39"/>
+                <searchBar contentMode="redraw" fixedFrame="YES" placeholder="&quot;Rechercher&quot;" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PZ-OW-rRX">
+                    <rect key="frame" x="101" y="107" width="313" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-uW-s32">
+                    <rect key="frame" x="0.0" y="107" width="51" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title=" ">
-                        <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                    <buttonConfiguration key="configuration" style="plain" title="">
+                        <imageReference key="image" image="globe" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color systemColor="labelColor"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </buttonConfiguration>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cya-SW-puw">
+                    <rect key="frame" x="51" y="107" width="50" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="">
+                        <imageReference key="image" image="book.closed" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color systemColor="labelColor"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="pressAddButton:" destination="-1" eventType="touchUpInside" id="s4l-Zo-RTd"/>
+                        <action selector="libraryApi:" destination="-1" eventType="touchUpInside" id="Bbf-I8-5eQ"/>
                     </connections>
                 </button>
-                <searchBar contentMode="redraw" placeholder="&quot;Rechercher&quot;" translatesAutoresizingMaskIntoConstraints="NO" id="7PZ-OW-rRX">
-                    <rect key="frame" x="0.0" y="83" width="414" height="51"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <scopeButtonTitles>
-                        <string>Title</string>
-                        <string>Title</string>
-                    </scopeButtonTitles>
-                </searchBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="7PZ-OW-rRX" firstAttribute="top" secondItem="Uzl-rF-Y7p" secondAttribute="bottom" symbolic="YES" id="2ae-Pv-GFO"/>
-                <constraint firstItem="Uzl-rF-Y7p" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="53W-h2-gWq"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uzl-rF-Y7p" secondAttribute="trailing" constant="20" id="Aet-QV-fEg"/>
-                <constraint firstItem="7PZ-OW-rRX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FAb-OT-1WC"/>
-                <constraint firstItem="DnL-ih-qzU" firstAttribute="top" secondItem="7PZ-OW-rRX" secondAttribute="bottom" id="OOp-Fn-XP8"/>
-                <constraint firstItem="7PZ-OW-rRX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="39" id="Tha-19-gUc"/>
-                <constraint firstItem="DnL-ih-qzU" firstAttribute="top" secondItem="7PZ-OW-rRX" secondAttribute="bottom" id="UJT-s6-QXP"/>
-                <constraint firstItem="DnL-ih-qzU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WRQ-9a-cJX"/>
-                <constraint firstItem="7PZ-OW-rRX" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eZg-E1-rtw"/>
-                <constraint firstItem="Uzl-rF-Y7p" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="327" id="lvs-hT-5Pd"/>
-                <constraint firstItem="DnL-ih-qzU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wgL-To-QRG"/>
-                <constraint firstAttribute="bottom" secondItem="DnL-ih-qzU" secondAttribute="bottom" id="zmT-R2-Td1"/>
-            </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="113.83928571428571"/>
         </view>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="book.closed" catalog="system" width="115" height="128"/>
+        <image name="globe" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

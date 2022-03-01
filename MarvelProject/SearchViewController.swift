@@ -13,6 +13,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     
     
 
+    
     var listComics:[MarvelComics] = []
     var cellList:[CharacterCollectionViewCell] = []
     var numberOfRow:Int = 0
@@ -20,29 +21,40 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var listCharacters: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loadingImage: UIImageView!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var marvelButton: UIButton!
+    @IBOutlet weak var apiButton: UIButton!
     
-    var characters: [MarvelCharacters] = []{
+    
+    
+    var characters: [MarvelCharacters] = []
+    {
         didSet {
             self.listCharacters.reloadData()
         }
     }
     
-    var characterSearch: [MarvelCharacters] = []{
+    var characterSearch: [MarvelCharacters] = []
+        {
         didSet {
             self.listCharacters.reloadData()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
-        let url = URL(string: "https://c.tenor.com/_IT4iiUqkw4AAAAC/homer-simpson-les-simpson.gif")
+        let url = URL(string: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/da734b28921021.55d95297d71f4.gif")
         let loader = UIActivityIndicatorView(style: .white)
         self.loadingImage.setGifFromURL(url!, customLoader: loader)
 
-        //self.loadingImage.isHidden = true
-        self.listCharacters.isHidden = true
-        self.searchBar.isHidden = true
+        self.loadingImage.isHidden = true
+        self.searchBar.backgroundImage = UIImage()
+        //self.listCharacters.isHidden = true
+        //self.searchBar.isHidden = true
+        //self.marvelButton.isHidden = true
+        //self.apiButton.isHidden = true
+        
 
         for i in appelApi{
             MarvelServices.getCharacters(offset: i) { err, characters in
@@ -83,7 +95,10 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         }
     
         
-        
+        //self.switchButton.clipsToBounds = true
+        //self.switchButton.layer.borderWidth = 1
+        //self.switchButton.isUserInteractionEnabled = true
+
         self.searchBar.delegate = self
         self.listCharacters.delegate = self
         self.listCharacters.dataSource = self
@@ -110,10 +125,12 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         self.numberOfRow += 1
         
-        if numberOfRow == 5{
+        if numberOfRow == 1{
             self.loadingImage.isHidden = true
             self.listCharacters.isHidden = false
             self.searchBar.isHidden = false
+            self.marvelButton.isHidden = false
+            self.apiButton.isHidden = false
         }
         print(numberOfRow)
         
@@ -165,10 +182,8 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
             //character.name.localizedCaseInsensitiveContainsString(searchText)
             if let range3 = character.name.range(of: searchText, options: .caseInsensitive) {
                 return true
-                listCharacters.reloadData()
             } else {
                 return false
-                listCharacters.reloadData()
             }
             
         })
@@ -180,12 +195,12 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
 
-    @IBAction func pressAddButton(_ sender: Any) {
-        self.navigationController?.pushViewController(AddViewController(), animated: true)
-        
+
+    @IBAction func libraryApi(_ sender: Any) {
+        self.navigationController?.pushViewController(OurHeroesViewController(),animated: false)
     }
+    
     
 
 }

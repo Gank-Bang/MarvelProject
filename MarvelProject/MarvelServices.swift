@@ -75,7 +75,7 @@ public class MarvelServices {
         var comicsList: [MarvelComics] = []
         let SearchViewController = SearchViewController()
         
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/comics?ts=1&offset=\(offset)&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/comics?ts=1&offset=\(offset)&limit=100&apikey=6e6baf96504028c5180ff86f48cf9b52&hash=e2238c975b6adc162aee7e96eb37e866")
         else{
             return
         }
@@ -146,5 +146,50 @@ public class MarvelServices {
          
         
     }
+    
+    class func getOurCharacters(completion: @escaping(Error?, [OurHeroes]?)->Void) {
+        var characterList: [OurHeroes] = []
+        let SearchViewController = SearchViewController()
+        
+        guard let url = URL(string: "https://esgi-marvel-app.herokuapp.com/getheros")
+        else{
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { data,res,err in
+            
+            DispatchQueue.main.async {
+                
+                guard err == nil else
+                {
+                   // PopUpError.show(message: "Une erreur réseau est survenue",parent: SearchPageViewController)
+                    return
+                }
+                guard let downloadedData = data else
+                {
+                    return
+                }
+                guard let json = try? JSONSerialization.jsonObject(with: downloadedData, options: .allowFragments) else
+                {
+                    return
+                }
+                guard let todos = json as? [String: Any]  else{
+                    return
+                }
+                guard let datas = todos["heros"] as? [[String:Any]] else {
+                    return
+                }
+                for data in datas {
+                    let character = CharacterFactory.createOurCharacter(from: data)
+                    characterList.append(character!)
+                }
+
+                completion(err, characterList)
+            }
+        }
+        task.resume() // lance la requete http
+         
+        
+    }
+    
 
 }

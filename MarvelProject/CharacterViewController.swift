@@ -14,6 +14,7 @@ class CharacterViewController: UIViewController,UICollectionViewDelegate,UIColle
     @IBOutlet weak var buttonMenu: UIButton!
     @IBOutlet weak var imageCharacter: UIImageView!
     @IBOutlet weak var detailsCharacter: UILabel!
+    @IBOutlet weak var nameCharacter: UILabel!
     
     var character: MarvelCharacters!
     var cellChoosed: CharacterCollectionViewCell!
@@ -31,6 +32,7 @@ class CharacterViewController: UIViewController,UICollectionViewDelegate,UIColle
         super.viewDidLoad()
         self.imageCharacter.image = self.cellChoosed.characterImage.image
         self.detailsCharacter.text = self.character.details
+        self.nameCharacter.text = self.character.name
         
         self.ComicsView.isHidden = true
         
