@@ -44,16 +44,34 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
         
+        
+        // PETIT KIFF PERSO
         let url = URL(string: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/da734b28921021.55d95297d71f4.gif")
-        let loader = UIActivityIndicatorView(style: .white)
-        self.loadingImage.setGifFromURL(url!, customLoader: loader)
+        let url2 = URL(string: "https://img.wattpad.com/5cf46a0ac879eebf163d88f8247166a0560dea45/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6c6776346475706f6a6a626468773d3d2d3734323233343739342e313561623839666436316663383032623837353631363536373734362e676966")
+        let url3 = URL(string: "https://c.tenor.com/atuEM9DqpxkAAAAC/the-avengers-team.gif")
+        let url4 = URL(string: "https://data.whicdn.com/images/330349801/original.gif")
+        let url5 = URL(string: "https://64.media.tumblr.com/071932debe3fb59e82d104b60f3d59ce/ffd12edd2f5bf40a-7d/s540x810/3c11d7c7175e9fb8767b36054d119b6237a7fc88.gifv")
+        
+        var listGifs:[URL] = []
+        listGifs.append(url!)
+        listGifs.append(url2!)
+        listGifs.append(url3!)
+        listGifs.append(url4!)
+        listGifs.append(url5!)
+        ///
+        
 
-        self.loadingImage.isHidden = true
+        
+        
+        let loader = UIActivityIndicatorView(style: .white)
+        self.loadingImage.setGifFromURL(listGifs.randomElement()!, customLoader: loader)
+
+        //self.loadingImage.isHidden = true
         self.searchBar.backgroundImage = UIImage()
-        //self.listCharacters.isHidden = true
-        //self.searchBar.isHidden = true
-        //self.marvelButton.isHidden = true
-        //self.apiButton.isHidden = true
+        self.listCharacters.isHidden = true
+        self.searchBar.isHidden = true
+        self.marvelButton.isHidden = true
+        self.apiButton.isHidden = true
         
 
         for i in appelApi{
@@ -125,7 +143,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         self.numberOfRow += 1
         
-        if numberOfRow == 1{
+        if numberOfRow == 50{
             self.loadingImage.isHidden = true
             self.listCharacters.isHidden = false
             self.searchBar.isHidden = false

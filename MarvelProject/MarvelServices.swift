@@ -14,8 +14,8 @@ public class MarvelServices {
     class func getCharacters(offset:Int,completion: @escaping(Error?, [MarvelCharacters]?)->Void) {
         var characterList: [MarvelCharacters] = []
         let SearchViewController = SearchViewController()
-        
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=100&apikey=8119ef0965821056212bf9b9fb7b239d&hash=1502fc2b7e44faf6c09a324bcdb3be42")
+        //http://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=100&apikey=6e6baf96504028c5180ff86f48cf9b52&hash=e2238c975b6adc162aee7e96eb37e866
+        guard let url = URL(string: "http://gateway.marvel.com/v1/public/characters?ts=1&offset=\(offset)&limit=100&apikey=6e6baf96504028c5180ff86f48cf9b52&hash=e2238c975b6adc162aee7e96eb37e866")
         else{
             return
         }
