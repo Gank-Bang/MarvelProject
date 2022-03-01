@@ -14,11 +14,16 @@ class OurCharacterViewController: UIViewController{
     //@IBOutlet weak var ComicsView: UICollectionView!
     @IBOutlet weak var buttonMenu: UIButton!
     @IBOutlet weak var imageCharacter: UIImageView!
-    @IBOutlet weak var detailsCharacter: UILabel!
-    @IBOutlet weak var nameCharacter: UILabel!
+    @IBOutlet weak var detailsCharacter: UITextView!
+    @IBOutlet weak var nameCharacter: UITextView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var imageURL: UITextView!
+    @IBOutlet weak var backButton: UIButton!
     
     var character: OurHeroes!
     var cellChoosed: CharacterCollectionViewCell!
+    
+    var oldName:String = ""
     
     static func newInstance(cell:CharacterCollectionViewCell,character:OurHeroes) -> OurCharacterViewController {
 
@@ -32,10 +37,18 @@ class OurCharacterViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.detailsCharacter.isEditable = false
+        self.nameCharacter.isEditable = false
+        self.imageURL.isEditable = false
         self.imageCharacter.image = self.cellChoosed.characterImage.image
         self.detailsCharacter.text = self.character.details
         self.nameCharacter.text = self.character.name
-        
+        self.imageCharacter.layer.cornerRadius = 10
+        self.saveButton.isHidden = true
+        self.imageURL.isHidden = true
+        self.oldName = self.character.name
+        self.saveButton.layer.cornerRadius = 10
         //self.ComicsView.isHidden = true
         
         //if (character.thumbnail?.pathExtension == "gif") {
@@ -131,15 +144,75 @@ class OurCharacterViewController: UIViewController{
     }
     
     
-    
+    @IBAction func pressSaveButton(_ sender: Any) {
+        self.detailsCharacter.isEditable = false
+        self.nameCharacter.isEditable = false
+        self.imageURL.isEditable = false
+        
+        guard let newName = self.nameCharacter?.text,
+              let newDesc = self.detailsCharacter.text,
+              let newImage = self.imageURL.text else{
+            return
+        }
+        
+        let parameters: [String: Any?] = [
+            "heroname": newName,
+            "description": newDesc,
+            "image": newImage,
+        ]
+        
+        AF.request("https://esgi-marvel-app.herokuapp.com/getheros", method:.get, parameters: nil, encoding: JSONEncoding.default)
+            .responseJSON { (response) in
+                switch response.result {
+                    
+                    case.success(let data):
+                    
+                        if let itemJson = data as? Dictionary<String,Any>,
+                           let items = itemJson["heros"] as? [[String:Any]] {
+                             for item in items {
+                                 let nameHero = item["heroname"] as? String
+                                 
+                                 if(self.oldName == nameHero && !newName.isEmpty && !newDesc.isEmpty && !newImage.isEmpty){
+                                     let id = item["_id"] as! String
+                                     AF.request("https://esgi-marvel-app.herokuapp.com/hero/\(id)", method:.patch, parameters: parameters as Parameters, encoding: JSONEncoding.default)
+                                         .responseJSON { (response) in
+                                             let alert = UIAlertController(title: "Informations", message: "Les données ont bien été modifié", preferredStyle: UIAlertController.Style.alert)
+                                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                             self.present(alert, animated: true, completion: nil)
+                                             self.imageURL.isHidden = true
+                                             self.imageCharacter.image = self.cellChoosed.characterImage.image
+                                             self.imageCharacter.isHidden = false
+                                         }
+                                     
+                                         
+                                 }
+                                 else if(newName.isEmpty || newDesc.isEmpty || newImage.isEmpty) {
+                                     let alert = UIAlertController(title: "Attention", message: "Veuillez entrer tout les champs", preferredStyle: UIAlertController.Style.alert)
+                                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                     self.present(alert, animated: true, completion: nil)
+                                 }
+                                
+                             }
+                        }
+                            
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+    }
     
     @IBAction func editButtonPressed(_ sender: Any) {
         
-        let EditViewController = EditViewController.newInstance(cell:self.cellChoosed, character: self.character)
-        self.navigationController?.pushViewController(EditViewController, animated: true)
+        /*let EditViewController = EditViewController.newInstance(cell:self.cellChoosed, character: self.character)
+        self.navigationController?.pushViewController(EditViewController, animated: true)*/
+        self.detailsCharacter.isEditable = true
+        self.nameCharacter.isEditable = true
+        self.saveButton.isHidden = false
+        self.imageURL.isHidden = false
+        self.imageURL.isEditable = true
+        self.imageCharacter.isHidden = true
+        
         
     }
-    
-    
     
 }

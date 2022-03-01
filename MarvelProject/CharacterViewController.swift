@@ -33,7 +33,7 @@ class CharacterViewController: UIViewController,UICollectionViewDelegate,UIColle
         self.imageCharacter.image = self.cellChoosed.characterImage.image
         self.detailsCharacter.text = self.character.details
         self.nameCharacter.text = self.character.name
-        
+        self.imageCharacter.layer.cornerRadius = 10
         self.ComicsView.isHidden = true
         
         if (character.thumbnail?.pathExtension == "gif") {
