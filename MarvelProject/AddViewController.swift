@@ -17,15 +17,11 @@ class AddViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     
     
-    @IBOutlet weak var heroToEditField: UITextField!
-    @IBOutlet weak var newNameField: UITextField!
-    @IBOutlet weak var newDescriptionField: UITextField!
-    @IBOutlet weak var newImageField: UITextField!
-    @IBOutlet weak var editButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.nameField.text = "https://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         
     }
     

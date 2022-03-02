@@ -143,7 +143,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         self.numberOfRow += 1
         
-        if numberOfRow == 50{
+        if numberOfRow == 80{
             self.loadingImage.isHidden = true
             self.listCharacters.isHidden = false
             self.searchBar.isHidden = false

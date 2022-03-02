@@ -42,6 +42,7 @@ class OurCharacterViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.imageURL.text = character.thumbnail
         self.detailsCharacter.isEditable = false
         self.nameCharacter.isEditable = false
         self.imageURL.isEditable = false
